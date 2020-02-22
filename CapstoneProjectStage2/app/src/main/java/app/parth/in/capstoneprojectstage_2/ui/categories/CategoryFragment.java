@@ -19,14 +19,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import app.parth.in.capstoneprojectstage_2.R;
-import app.parth.in.capstoneprojectstage_2.model.Author;
 
 
 public class CategoryFragment extends Fragment implements CategoryAdapter.ClickListener {
 
-    private CategoryViewModel homeViewModel;
     private ArrayList<Category> mCategoriesList = new ArrayList<>();
-    private ArrayList<Author> mAuthorList = new ArrayList<>();
 
     private RecyclerView recyclerView;
 

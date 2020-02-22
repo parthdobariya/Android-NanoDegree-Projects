@@ -2,22 +2,16 @@ package app.parth.in.capstoneprojectstage_2.ui.categories;
 
 import android.os.Bundle;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
-import android.view.View;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import app.parth.in.capstoneprojectstage_2.R;
 
-public class QuotesActivity extends AppCompatActivity implements QuotesAdapter.ClickListener{
+public class QuotesActivity extends AppCompatActivity implements QuotesAdapter.ClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +28,8 @@ public class QuotesActivity extends AppCompatActivity implements QuotesAdapter.C
         List<Quotes> quotesList = new ArrayList<>();
 
         quotesList.add(new Quotes("dummy1", "author"));
-        quotesList.add(new Quotes("dummy2","author"));
-        quotesList.add(new Quotes("dummy3","author"));
+        quotesList.add(new Quotes("dummy2", "author"));
+        quotesList.add(new Quotes("dummy3", "author"));
 
         QuotesAdapter mAdapter = new QuotesAdapter(quotesList, this);
         recyclerView.setAdapter(mAdapter);
