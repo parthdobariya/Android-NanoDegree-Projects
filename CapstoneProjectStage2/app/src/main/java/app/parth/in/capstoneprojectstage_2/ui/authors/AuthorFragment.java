@@ -13,17 +13,16 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import app.parth.in.capstoneprojectstage_2.R;
-
-import app.parth.in.capstoneprojectstage_2.ui.categories.QuotesActivity;
+import app.parth.in.capstoneprojectstage_2.model.Author;
+import app.parth.in.capstoneprojectstage_2.ui.quotes.QuotesActivity;
 
 public class AuthorFragment extends Fragment implements AuthorAdapter.ClickListener {
-
-    private ArrayList<Author> mAuthorList = new ArrayList<>();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -33,23 +32,26 @@ public class AuthorFragment extends Fragment implements AuthorAdapter.ClickListe
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        final RecyclerView recyclerView = view.findViewById(R.id.author_recyclerview);
+        final RecyclerView recyclerView = view.findViewById(R.id.author_recycler_view);
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
 
+        // Initialize database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
+        // Access authors table
         DatabaseReference mCategoriesReference = database.getReference("authors");
 
-        ValueEventListener categoriesListener = new ValueEventListener(){
+        ValueEventListener categoriesListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                ArrayList<Author> mAuthorList = new ArrayList<>();
+
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
                     mAuthorList.add(child.getValue(Author.class));
                 }
 
-                AuthorAdapter mAdapter = new AuthorAdapter(mAuthorList, AuthorFragment.this);
-                recyclerView.setAdapter(mAdapter);
+                recyclerView.setAdapter(new AuthorAdapter(mAuthorList, AuthorFragment.this));
             }
 
             @Override
@@ -66,5 +68,4 @@ public class AuthorFragment extends Fragment implements AuthorAdapter.ClickListe
         Intent i = new Intent(getContext(), QuotesActivity.class);
         startActivity(i);
     }
-
 }

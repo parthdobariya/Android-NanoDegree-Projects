@@ -19,13 +19,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import app.parth.in.capstoneprojectstage_2.R;
+import app.parth.in.capstoneprojectstage_2.model.Category;
+import app.parth.in.capstoneprojectstage_2.ui.quotes.QuotesActivity;
 
 
 public class CategoryFragment extends Fragment implements CategoryAdapter.ClickListener {
-
-    private ArrayList<Category> mCategoriesList = new ArrayList<>();
-
-    private RecyclerView recyclerView;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -35,18 +33,22 @@ public class CategoryFragment extends Fragment implements CategoryAdapter.ClickL
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        recyclerView = view.findViewById(R.id.my_recycler_view);
+        final RecyclerView recyclerView = view.findViewById(R.id.category_recycler_view);
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
 
+        // Initialize database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
+        // Access categories table
         DatabaseReference mCategoriesReference = database.getReference("categories");
 
         // Attach a listener to read the data at our posts reference
         ValueEventListener categoriesListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                ArrayList<Category> mCategoriesList = new ArrayList<>();
+
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
                     mCategoriesList.add(new Category((String) child.getValue()));
                 }

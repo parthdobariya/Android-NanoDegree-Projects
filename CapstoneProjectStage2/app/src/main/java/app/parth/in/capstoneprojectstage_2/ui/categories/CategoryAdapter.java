@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 import app.parth.in.capstoneprojectstage_2.R;
+import app.parth.in.capstoneprojectstage_2.model.Category;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder> {
 
@@ -35,9 +36,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
     @Override
     public void onBindViewHolder(@NonNull CategoryViewHolder holder, final int position) {
-        Category category = categoryList.get(position);
-        holder.categoryText.setText(category.name);
-        holder.cardView.setOnClickListener(new View.OnClickListener() {
+        holder.categoryText.setText(categoryList.get(position).getName());
+        holder.categoryContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 listener.onClickListener(categoryList.get(position));
@@ -56,12 +56,12 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
     static class CategoryViewHolder extends RecyclerView.ViewHolder {
         TextView categoryText;
-        CardView cardView;
+        CardView categoryContainer;
 
         CategoryViewHolder(View itemView) {
             super(itemView);
             categoryText = itemView.findViewById(R.id.category_tv);
-            cardView = itemView.findViewById(R.id.card_view);
+            categoryContainer = itemView.findViewById(R.id.category_container);
         }
     }
 }

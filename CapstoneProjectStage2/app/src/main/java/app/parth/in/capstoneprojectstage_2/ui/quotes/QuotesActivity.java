@@ -1,4 +1,4 @@
-package app.parth.in.capstoneprojectstage_2.ui.categories;
+package app.parth.in.capstoneprojectstage_2.ui.quotes;
 
 import android.os.Bundle;
 
@@ -10,6 +10,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import app.parth.in.capstoneprojectstage_2.R;
+import app.parth.in.capstoneprojectstage_2.model.Quotes;
 
 public class QuotesActivity extends AppCompatActivity implements QuotesAdapter.ClickListener {
 
