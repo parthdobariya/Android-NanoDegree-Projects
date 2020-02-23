@@ -9,10 +9,12 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
+
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 import app.parth.in.capstoneprojectstage_2.R;
+import app.parth.in.capstoneprojectstage_2.model.Author;
 
 public class AuthorAdapter extends RecyclerView.Adapter<AuthorAdapter.AuthorViewHolder> {
 
@@ -41,9 +43,9 @@ public class AuthorAdapter extends RecyclerView.Adapter<AuthorAdapter.AuthorView
         holder.authorName.setText(author.getName());
         Picasso.get()
                 .load(author.getProfilePicture())
-                .into(holder.authorProfile_pic);
+                .into(holder.authorProfilePic);
 
-        holder.cardView.setOnClickListener(new View.OnClickListener() {
+        holder.authorContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 listener.onClickListener(authorList.get(position));
@@ -62,15 +64,14 @@ public class AuthorAdapter extends RecyclerView.Adapter<AuthorAdapter.AuthorView
 
     static class AuthorViewHolder extends RecyclerView.ViewHolder {
         TextView authorName;
-        CardView cardView;
-        ImageView authorProfile_pic;
+        CardView authorContainer;
+        ImageView authorProfilePic;
 
         AuthorViewHolder(View itemView) {
             super(itemView);
             authorName = itemView.findViewById(R.id.author_tv);
-            cardView = itemView.findViewById(R.id.card_view);
-            authorProfile_pic = itemView.findViewById(R.id.iv_author);
-
+            authorContainer = itemView.findViewById(R.id.author_container);
+            authorProfilePic = itemView.findViewById(R.id.author_iv);
         }
     }
 }

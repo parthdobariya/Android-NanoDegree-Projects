@@ -1,4 +1,4 @@
-package app.parth.in.capstoneprojectstage_2.ui.categories;
+package app.parth.in.capstoneprojectstage_2.model;
 
 public class Category {
     public String name;
@@ -9,5 +9,9 @@ public class Category {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getName() {
+        return name;
     }
 }

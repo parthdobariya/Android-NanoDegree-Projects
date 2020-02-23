@@ -1,4 +1,4 @@
-package app.parth.in.capstoneprojectstage_2.ui.categories;
+package app.parth.in.capstoneprojectstage_2.ui.quotes;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 import app.parth.in.capstoneprojectstage_2.R;
+import app.parth.in.capstoneprojectstage_2.model.Quotes;
 
 public class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.QuotesViewHolder> {
     private List<Quotes> quotesList;
@@ -35,7 +36,7 @@ public class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.QuotesView
     @Override
     public void onBindViewHolder(@NonNull QuotesViewHolder holder, final int position) {
         Quotes quotes = quotesList.get(position);
-        holder.quotesText.setText(quotes.name);
+        holder.quotesText.setText(quotes.getName());
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -16,7 +16,7 @@
             android:label="@string/title_activity_favourites"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
-            android:name=".ui.categories.QuotesActivity"
+            android:name=".ui.quotes.QuotesActivity"
             android:label="@string/title_activity_quotes"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity

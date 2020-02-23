@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="cardBackgroundColor">#e4bfef</color>
-    <color name="textColor">#fff</color>
-    <color name="catecoryBackgroundColor">#FFEE58</color>
+    <color name="textWhite">#fff</color>
+    <color name="categoryBackgroundColor">#FFEE58</color>
+    <color name="authorBgColor">#EBE6E2</color>
 </resources>

@@ -2,13 +2,8 @@ package app.parth.in.capstoneprojectstage_2.ui.favourites;
 
 import android.os.Bundle;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
-import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,8 +11,7 @@ import java.util.List;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import app.parth.in.capstoneprojectstage_2.R;
-import app.parth.in.capstoneprojectstage_2.ui.categories.Quotes;
-import app.parth.in.capstoneprojectstage_2.ui.categories.QuotesAdapter;
+import app.parth.in.capstoneprojectstage_2.model.Favourite;
 
 public class FavouritesActivity extends AppCompatActivity implements FavouriteAdapter.ClickListener{
 

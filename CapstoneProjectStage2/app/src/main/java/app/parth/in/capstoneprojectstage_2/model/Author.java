@@ -1,11 +1,10 @@
-package app.parth.in.capstoneprojectstage_2.ui.authors;
+package app.parth.in.capstoneprojectstage_2.model;
 
 public class Author {
     private String name;
     private String profilePicture;
 
-    public Author() {
-    }
+    public Author() { }
 
     public Author(String name, String profilePicture) {
         this.name = name;
