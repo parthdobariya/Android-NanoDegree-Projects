@@ -2,14 +2,14 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/tools"
-    android:id="@+id/table"
+    android:id="@+id/card_view"
     android:layout_width="match_parent"
     android:layout_height="160dp"
     android:layout_margin="10dp"
     android:orientation="vertical"
     card_view:cardElevation="5dp">
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="160dp">
 
@@ -21,7 +21,7 @@
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/iv_logo"
+                android:id="@+id/iv_author"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal"
@@ -33,17 +33,17 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_alignParentBottom="true"
-            android:background="#644338"
+            android:background="@color/cardBackgroundColor"
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/tableno"
+                android:id="@+id/author_tv"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginLeft="10dp"
                 android:gravity="center|start"
                 android:text="table1"
-                android:textColor="#fff"
+                android:textColor="@color/textColor"
                 android:textSize="18sp" />
 
         </RelativeLayout>
