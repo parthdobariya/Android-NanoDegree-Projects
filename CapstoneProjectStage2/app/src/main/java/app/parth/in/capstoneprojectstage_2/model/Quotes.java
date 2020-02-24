@@ -1,27 +1,40 @@
 package app.parth.in.capstoneprojectstage_2.model;
 
 public class Quotes {
-    String name;
     String author;
+    String category;
+    String title;
 
-    public Quotes(String name, String author) {
-        this.name = name;
+    public Quotes(String author, String category, String title) {
         this.author = author;
+        this.category = category;
+        this.title = title;
     }
 
-    public String getName() {
-        return name;
+    public Quotes() {
     }
 
     public String getAuthor() {
         return author;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getCategory() {
+        return category;
+    }
+
+    public String getTitle() {
+        return title;
     }
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

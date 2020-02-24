@@ -65,7 +65,8 @@ public class AuthorFragment extends Fragment implements AuthorAdapter.ClickListe
 
     @Override
     public void onClickListener(Author author) {
-        Intent i = new Intent(getContext(), QuotesActivity.class);
-        startActivity(i);
+        Intent intent = new Intent(getContext(), QuotesActivity.class);
+        intent.putExtra("EXTRA_AUTHOR_NAME", author.getName());
+        startActivity(intent);
     }
 }

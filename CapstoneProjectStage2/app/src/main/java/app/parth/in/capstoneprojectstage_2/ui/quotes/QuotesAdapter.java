@@ -36,7 +36,8 @@ public class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.QuotesView
     @Override
     public void onBindViewHolder(@NonNull QuotesViewHolder holder, final int position) {
         Quotes quotes = quotesList.get(position);
-        holder.quotesText.setText(quotes.getName());
+        holder.quotesText.setText(quotes.getTitle());
+        holder.authorName.setText(String.format("%s %s", "by", quotes.getAuthor()));
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -57,12 +58,13 @@ public class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.QuotesView
     static class QuotesViewHolder extends RecyclerView.ViewHolder {
         TextView quotesText;
         CardView cardView;
+        TextView authorName;
 
         QuotesViewHolder(View itemView) {
             super(itemView);
             quotesText = itemView.findViewById(R.id.quotes_tv);
             cardView = itemView.findViewById(R.id.quotes_card_view);
+            authorName = itemView.findViewById(R.id.author_name);
         }
     }
-
 }

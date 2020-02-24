@@ -24,7 +24,7 @@ import app.parth.in.capstoneprojectstage_2.ui.quotes.QuotesActivity;
 
 
 public class CategoryFragment extends Fragment implements CategoryAdapter.ClickListener {
-
+    
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,7 +67,8 @@ public class CategoryFragment extends Fragment implements CategoryAdapter.ClickL
 
     @Override
     public void onClickListener(Category category) {
-        Intent i = new Intent(getContext(), QuotesActivity.class);
-        startActivity(i);
+        Intent intent = new Intent(getContext(), QuotesActivity.class);
+        intent.putExtra("EXTRA_CATEGORY_NAME", category.getName());
+        startActivity(intent);
     }
 }

@@ -7,4 +7,10 @@
     <color name="textWhite">#fff</color>
     <color name="categoryBackgroundColor">#FFEE58</color>
     <color name="authorBgColor">#EBE6E2</color>
+    <color name="quote_list_card_view_background">#EFEBE9</color>
+    <color name="darker_gray">#aaa</color>
+    <color name="quote_list_author_name_text">#424242</color>
+
+
+
 </resources>
