@@ -1,9 +1,15 @@
 package app.parth.in.capstoneprojectstage_2.ui.quotes;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
-import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -21,25 +27,50 @@ public class QuotesActivity extends AppCompatActivity implements QuotesAdapter.C
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        RecyclerView recyclerView = findViewById(R.id.quotes_recycler_view);
+        String categoryName = getIntent().getStringExtra("EXTRA_CATEGORY_NAME");
+        String authorName = getIntent().getStringExtra("EXTRA_AUTHOR_NAME");
+
+        final RecyclerView recyclerView = findViewById(R.id.quotes_recycler_view);
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        List<Quotes> quotesList = new ArrayList<>();
+        // Initialize database
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        // Access quotes table
+        DatabaseReference mQuotesReference = database.getReference("quotes");
 
-        quotesList.add(new Quotes("dummy1", "author"));
-        quotesList.add(new Quotes("dummy2", "author"));
-        quotesList.add(new Quotes("dummy3", "author"));
+        // Attach a listener to read the data at our posts reference
+        ValueEventListener quotesListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                ArrayList<Quotes> quotesList = new ArrayList<>();
 
-        QuotesAdapter mAdapter = new QuotesAdapter(quotesList, this);
-        recyclerView.setAdapter(mAdapter);
+                for (DataSnapshot child : dataSnapshot.getChildren()) {
+                    Quotes quotes = child.getValue(Quotes.class);
+                    quotesList.add(quotes);
+                }
 
+                QuotesAdapter mAdapter = new QuotesAdapter(quotesList, QuotesActivity.this);
+                recyclerView.setAdapter(mAdapter);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("The read failed: " + databaseError.getCode());
+            }
+        };
+
+        if (categoryName != null) {
+            mQuotesReference.orderByChild("category").equalTo(categoryName).addValueEventListener(quotesListener);
+        } else {
+            mQuotesReference.orderByChild("author").equalTo(authorName).addValueEventListener(quotesListener);
+        }
     }
 
     @Override
     public void onClickListener(Quotes quotes) {
-
-
+        Intent intent = new Intent(this, QuoteDetailsActivity.class);
+        startActivity(intent);
     }
 }
