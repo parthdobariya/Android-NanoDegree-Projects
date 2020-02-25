@@ -11,6 +11,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -30,6 +31,10 @@ public class QuotesActivity extends AppCompatActivity implements QuotesAdapter.C
         String categoryName = getIntent().getStringExtra("EXTRA_CATEGORY_NAME");
         String authorName = getIntent().getStringExtra("EXTRA_AUTHOR_NAME");
 
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle(categoryName);
+        }
         final RecyclerView recyclerView = findViewById(R.id.quotes_recycler_view);
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
@@ -71,6 +76,8 @@ public class QuotesActivity extends AppCompatActivity implements QuotesAdapter.C
     @Override
     public void onClickListener(Quotes quotes) {
         Intent intent = new Intent(this, QuoteDetailsActivity.class);
+        intent.putExtra("EXTRA_AUTHOR_NAME", quotes.getAuthor());
+        intent.putExtra("EXTRA_TITLE_NAME", quotes.getTitle());
         startActivity(intent);
     }
 }

@@ -8,4 +8,11 @@
     tools:context=".ui.quotes.QuotesActivity"
     tools:showIn="@layout/activity_quotes">
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/quotes_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
