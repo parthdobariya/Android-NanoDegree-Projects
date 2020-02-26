@@ -33,7 +33,11 @@ public class QuotesActivity extends AppCompatActivity implements QuotesAdapter.C
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
-            actionBar.setTitle(categoryName);
+            if (categoryName == null) {
+                actionBar.setTitle(authorName);
+            } else {
+                actionBar.setTitle(categoryName);
+            }
         }
         final RecyclerView recyclerView = findViewById(R.id.quotes_recycler_view);
         recyclerView.setHasFixedSize(true);
@@ -77,7 +81,7 @@ public class QuotesActivity extends AppCompatActivity implements QuotesAdapter.C
     public void onClickListener(Quotes quotes) {
         Intent intent = new Intent(this, QuoteDetailsActivity.class);
         intent.putExtra("EXTRA_AUTHOR_NAME", quotes.getAuthor());
-        intent.putExtra("EXTRA_TITLE_NAME", quotes.getTitle());
+        intent.putExtra("EXTRA_QUOTE", quotes.getTitle());
         startActivity(intent);
     }
 }
