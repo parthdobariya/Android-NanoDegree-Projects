@@ -33,7 +33,11 @@ public class QuotesActivity extends AppCompatActivity implements QuotesAdapter.C
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
-            actionBar.setTitle(categoryName);
+            if (categoryName == null) {
+                actionBar.setTitle(authorName);
+            } else {
+                actionBar.setTitle(categoryName);
+            }
         }
         final RecyclerView recyclerView = findViewById(R.id.quotes_recycler_view);
         recyclerView.setHasFixedSize(true);
