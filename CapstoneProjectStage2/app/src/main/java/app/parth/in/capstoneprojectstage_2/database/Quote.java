@@ -1,17 +1,24 @@
-package app.parth.in.capstoneprojectstage_2.model;
+package app.parth.in.capstoneprojectstage_2.database;
 
-public class Quotes {
-    String author;
-    String category;
-    String title;
 
-    public Quotes(String author, String category, String title) {
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity
+public class Quote {
+    @NonNull
+    @PrimaryKey
+    public String author;
+
+    public String category;
+
+    public String title;
+
+    public Quote(@NonNull String author, String category, String title) {
         this.author = author;
         this.category = category;
         this.title = title;
-    }
-
-    public Quotes() {
     }
 
     public String getAuthor() {

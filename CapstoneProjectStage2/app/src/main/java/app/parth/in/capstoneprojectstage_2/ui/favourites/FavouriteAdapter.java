@@ -11,14 +11,14 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 import app.parth.in.capstoneprojectstage_2.R;
-import app.parth.in.capstoneprojectstage_2.model.Favourite;
+import app.parth.in.capstoneprojectstage_2.model.Quotes;
 
 public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.FavouriteViewHolder> {
 
-    private List<Favourite> favouriteList;
+    private List<Quotes> favouriteList;
     private FavouriteAdapter.ClickListener listener;
 
-    FavouriteAdapter(List<Favourite> favouriteList, ClickListener listener) {
+    FavouriteAdapter(List<Quotes> favouriteList, ClickListener listener) {
         super();
         this.favouriteList = favouriteList;
         this.listener = listener;
@@ -36,8 +36,10 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.Favo
 
     @Override
     public void onBindViewHolder(@NonNull FavouriteAdapter.FavouriteViewHolder holder, final int position) {
-        Favourite favourite = favouriteList.get(position);
-        holder.favouriteText.setText(favourite.getName());
+        Quotes quotes = favouriteList.get(position);
+        holder.favouriteQuoteText.setText(quotes.getTitle());
+        holder.favouriteAuthorText.setText(quotes.getAuthor());
+
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -52,17 +54,18 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.Favo
     }
 
     interface ClickListener {
-        void onClickListener(Favourite quotes);
+        void onClickListener(Quotes quotes);
     }
 
     static class FavouriteViewHolder extends RecyclerView.ViewHolder {
-        TextView favouriteText;
+        TextView favouriteQuoteText, favouriteAuthorText;
         CardView cardView;
 
         FavouriteViewHolder(View itemView) {
             super(itemView);
-            favouriteText = itemView.findViewById(R.id.favourite_tv);
+            favouriteQuoteText = itemView.findViewById(R.id.fav_quote_tv);
             cardView = itemView.findViewById(R.id.favourite_card_view);
+            favouriteAuthorText = itemView.findViewById(R.id.fav_author_name);
         }
     }
 }
