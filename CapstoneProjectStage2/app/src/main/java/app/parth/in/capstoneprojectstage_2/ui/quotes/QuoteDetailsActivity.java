@@ -3,13 +3,16 @@ package app.parth.in.capstoneprojectstage_2.ui.quotes;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.room.Room;
 import app.parth.in.capstoneprojectstage_2.R;
+import app.parth.in.capstoneprojectstage_2.database.Quote;
+import app.parth.in.capstoneprojectstage_2.database.QuoteDatabase;
 
 public class QuoteDetailsActivity extends AppCompatActivity {
 
@@ -20,22 +23,57 @@ public class QuoteDetailsActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        String authorName = getIntent().getStringExtra("EXTRA_AUTHOR_NAME");
-        String titleName = getIntent().getStringExtra("EXTRA_TITLE_NAME");
+        final String authorName = getIntent().getStringExtra("EXTRA_AUTHOR_NAME");
+        final String titleName = getIntent().getStringExtra("EXTRA_TITLE_NAME");
+        final String categoryName = getIntent().getStringExtra("EXTRA_CATEGORY_NAME");
 
-        TextView textViewAuthor = (TextView) findViewById(R.id.author_name);
-        TextView textViewTitle = (TextView) findViewById(R.id.title_name);
+        TextView textViewAuthor = findViewById(R.id.author_name);
+        TextView textViewTitle = findViewById(R.id.title_name);
 
         textViewAuthor.setText(authorName);
         textViewTitle.setText(titleName);
-        
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+
+        final QuoteDatabase quoteDatabase = Room.databaseBuilder(getApplicationContext(), QuoteDatabase.class, "quote_db")
+                .allowMainThreadQueries().build();
+
+        Quote quote = quoteDatabase.quoteDao().getQuote(authorName, titleName, categoryName);
+
+        final FloatingActionButton fabLike = findViewById(R.id.like_btn);
+        final FloatingActionButton fabUnlike = findViewById(R.id.unlike_btn);
+
+        fabLike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Quote quotes = new Quote(authorName, categoryName, titleName);
+
+                quoteDatabase.quoteDao().delete(quotes);
+                Toast.makeText(QuoteDetailsActivity.this, "Removed From Favourite",
+                        Toast.LENGTH_LONG).show();
+                fabLike.hide();
+                fabUnlike.show();
             }
         });
+
+        fabUnlike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Quote quotes = new Quote(authorName, categoryName, titleName);
+                quoteDatabase.quoteDao().insert(quotes);
+                Toast.makeText(QuoteDetailsActivity.this, "Added To Favourite",
+                        Toast.LENGTH_LONG).show();
+                fabLike.show();
+                fabUnlike.hide();
+            }
+        });
+
+        if (quote == null) {
+            // Data not found
+            fabLike.hide();
+            fabUnlike.show();
+        } else {
+            // Data found
+            fabLike.show();
+            fabUnlike.hide();
+        }
     }
 }
