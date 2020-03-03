@@ -19,7 +19,12 @@ public class QuoteDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_quote_details);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        TextView textView = findViewById(R.id.quote_tv);
+
+        TextView textViewAuthor = findViewById(R.id.author_name);
+        TextView textViewTitle = findViewById(R.id.title_name);
+
+        textViewAuthor.setText(getIntent().getStringExtra("EXTRA_AUTHOR_NAME"));
+        textViewTitle.setText(getIntent().getStringExtra("EXTRA_QUOTE"));
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
