@@ -23,6 +23,15 @@ public class QuoteDetailsActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_white);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
         final String authorName = getIntent().getStringExtra("EXTRA_AUTHOR_NAME");
         final String titleName = getIntent().getStringExtra("EXTRA_TITLE_NAME");
         final String categoryName = getIntent().getStringExtra("EXTRA_CATEGORY_NAME");
