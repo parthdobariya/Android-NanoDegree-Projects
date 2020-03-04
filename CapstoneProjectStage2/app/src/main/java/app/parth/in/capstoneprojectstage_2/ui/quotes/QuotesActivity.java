@@ -2,6 +2,7 @@ package app.parth.in.capstoneprojectstage_2.ui.quotes;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -27,6 +28,15 @@ public class QuotesActivity extends AppCompatActivity implements QuotesAdapter.C
         setContentView(R.layout.activity_quotes);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_white);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         String categoryName = getIntent().getStringExtra("EXTRA_CATEGORY_NAME");
         String authorName = getIntent().getStringExtra("EXTRA_AUTHOR_NAME");

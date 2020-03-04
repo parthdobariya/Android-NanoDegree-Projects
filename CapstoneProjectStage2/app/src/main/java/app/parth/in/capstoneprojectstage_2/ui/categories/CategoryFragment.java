@@ -1,10 +1,15 @@
 package app.parth.in.capstoneprojectstage_2.ui.categories;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -37,6 +42,26 @@ public class CategoryFragment extends Fragment implements CategoryAdapter.ClickL
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
+
+        TextView textView = view.findViewById(R.id.category_status_tv);
+
+        ConnectivityManager cm = (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        if (activeNetwork != null) {
+            // connected to the internet
+
+            Toast.makeText(getContext(), "Network connection is available", Toast.LENGTH_SHORT).show();
+            if (activeNetwork.getType() == ConnectivityManager.TYPE_WIFI) {
+                // connected to wifi
+
+            } else if (activeNetwork.getType() == ConnectivityManager.TYPE_MOBILE) {
+                // connected to mobile data
+            }
+        } else {
+            // not connected to the internet
+            Toast.makeText(getContext(), "Network connection is not available", Toast.LENGTH_SHORT).show();
+            textView.setText("Network connection is not available");
+        }
 
         // Initialize database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
