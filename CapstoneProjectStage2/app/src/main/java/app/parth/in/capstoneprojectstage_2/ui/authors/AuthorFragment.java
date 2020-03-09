@@ -42,13 +42,11 @@ public class AuthorFragment extends Fragment implements AuthorAdapter.ClickListe
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
 
-        TextView textView = view.findViewById(R.id.author_status_tv);
-
         ConnectivityManager cm = (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         if (activeNetwork != null) {
             // connected to the internet
-            Toast.makeText(getContext(), "Network connection is available", Toast.LENGTH_SHORT).show();
+          //  Toast.makeText(getContext(), "Network connection is available", Toast.LENGTH_SHORT).show();
             if (activeNetwork.getType() == ConnectivityManager.TYPE_WIFI) {
                 // connected to wifi
 
@@ -58,7 +56,9 @@ public class AuthorFragment extends Fragment implements AuthorAdapter.ClickListe
         } else {
             // not connected to the internet
             Toast.makeText(getContext(), "Network connection is not available", Toast.LENGTH_SHORT).show();
-            textView.setText("Network connection is not available");
+            TextView textView = view.findViewById(R.id.author_status_tv);
+
+            textView.setText(getResources().getString(R.string.Internet_not_available));
         }
 
         // Initialize database

@@ -11,8 +11,9 @@
     <dimen name="card_elevation">4dp</dimen>
     <dimen name="padding_8dp">8dp</dimen>
     <dimen name="quotes_list_author_name_dimen">18sp</dimen>
-    <dimen name="quote_text_size">25sp</dimen>
-    <dimen name="author_margin">10dp</dimen>
-    <dimen name="author_name_dimen">20sp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+
+    <!--Widget padding -->
+    <dimen name="widget_padding">8dp</dimen>
+    <dimen name="author_name_dimen">20sp</dimen>
 </resources>
