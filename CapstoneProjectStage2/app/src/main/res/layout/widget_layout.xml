@@ -2,16 +2,15 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/design_default_color_primary_dark"
     android:layout_margin="@dimen/widget_padding">
-<!--
-    android:background="@color/cardBackgroundColor"
--->
+
     <StackView
         android:id="@+id/widget_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/cardBackgroundColor"
         android:gravity="center"
+        android:background="@android:color/transparent"
         android:loopViews="true"/>
 <!--
     android:background="@android:color/transparent"
