@@ -43,14 +43,12 @@ public class CategoryFragment extends Fragment implements CategoryAdapter.ClickL
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
 
-        TextView textView = view.findViewById(R.id.category_status_tv);
-
         ConnectivityManager cm = (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         if (activeNetwork != null) {
             // connected to the internet
 
-            Toast.makeText(getContext(), "Network connection is available", Toast.LENGTH_SHORT).show();
+          //  Toast.makeText(getContext(), "Network connection is available", Toast.LENGTH_SHORT).show();
             if (activeNetwork.getType() == ConnectivityManager.TYPE_WIFI) {
                 // connected to wifi
 
@@ -60,7 +58,8 @@ public class CategoryFragment extends Fragment implements CategoryAdapter.ClickL
         } else {
             // not connected to the internet
             Toast.makeText(getContext(), "Network connection is not available", Toast.LENGTH_SHORT).show();
-            textView.setText("Network connection is not available");
+            TextView textView = view.findViewById(R.id.category_status_tv);
+            textView.setText(getResources().getString(R.string.Internet_not_available));
         }
 
         // Initialize database

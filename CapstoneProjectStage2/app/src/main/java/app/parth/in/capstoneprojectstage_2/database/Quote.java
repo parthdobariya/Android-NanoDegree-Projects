@@ -21,6 +21,10 @@ public class Quote {
         this.title = title;
     }
 
+    public Quote(String s) {
+
+    }
+
     public String getAuthor() {
         return author;
     }
