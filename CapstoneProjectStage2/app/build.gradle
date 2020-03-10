@@ -3,8 +3,8 @@ apply plugin: 'com.google.gms.google-services'
 
 android {
     signingConfigs {
-        debug {
-            storeFile file('/Users/Parth/Desktop/CapstoneProjectStage2')
+        release {
+            storeFile file('/keystore/CapstoneProjectStage2')
             storePassword 'CapstoneProjectStage2'
             keyAlias = 'CapstoneProjectStage2key'
             keyPassword 'CapstoneProjectStage2'
@@ -24,6 +24,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
 }
@@ -46,6 +47,5 @@ dependencies {
 
     implementation 'androidx.room:room-runtime:2.2.4'
     annotationProcessor 'androidx.room:room-compiler:2.2.4'
-//    kapt "android.arch.persistence.room:compiler:1.1.1"
 
 }
