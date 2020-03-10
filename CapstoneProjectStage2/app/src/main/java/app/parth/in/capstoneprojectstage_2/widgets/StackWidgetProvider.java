@@ -15,20 +15,31 @@ import app.parth.in.capstoneprojectstage_2.R;
  * Implementation of App Widget functionality.
  */
 
-
 public class StackWidgetProvider extends AppWidgetProvider {
     public static final String TOAST_ACTION = ".widgets.QuoteWidgetProvider.TOAST_ACTION";
     public static final String EXTRA_ITEM = ".widgets.QuoteWidgetProvider.EXTRA_ITEM";
+
+    @Override
+    public void onDeleted(Context context, int[] appWidgetIds) {
+        super.onDeleted(context, appWidgetIds);
+    }
+
+    @Override
+    public void onDisabled(Context context) {
+        super.onDisabled(context);
+    }
+
+    @Override
+    public void onEnabled(Context context) {
+        super.onEnabled(context);
+    }
 
     // Called when the BroadcastReceiver receives an Intent broadcast.
     // Checks to see whether the intent's action is TOAST_ACTION. If it is, the app widget
     // displays a Toast message for the current item.
     @Override
     public void onReceive(Context context, Intent intent) {
-        AppWidgetManager mgr = AppWidgetManager.getInstance(context);
         if (intent.getAction().equals(TOAST_ACTION)) {
-            int appWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
-                    AppWidgetManager.INVALID_APPWIDGET_ID);
             int viewIndex = intent.getIntExtra(EXTRA_ITEM, 0);
             Toast.makeText(context, "Touched view " + viewIndex, Toast.LENGTH_SHORT).show();
         }

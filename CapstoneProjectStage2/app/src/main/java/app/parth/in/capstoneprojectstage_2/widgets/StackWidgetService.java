@@ -1,6 +1,5 @@
 package app.parth.in.capstoneprojectstage_2.widgets;
 
-import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,10 +9,14 @@ import android.widget.RemoteViewsService;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.room.Room;
 import app.parth.in.capstoneprojectstage_2.R;
+import app.parth.in.capstoneprojectstage_2.database.Quote;
+import app.parth.in.capstoneprojectstage_2.database.QuoteDatabase;
 import app.parth.in.capstoneprojectstage_2.model.Quotes;
 
 public class StackWidgetService extends RemoteViewsService {
+
     @Override
     public RemoteViewsFactory onGetViewFactory(Intent intent) {
         return new StackRemoteViewsFactory(this.getApplicationContext(), intent);
@@ -21,15 +24,11 @@ public class StackWidgetService extends RemoteViewsService {
 }
 
 class StackRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
-    private static final int count = 10;
-    private List<Quotes> widgetItems = new ArrayList<Quotes>();
+    private List<Quotes> widgetItems = new ArrayList<>();
     private Context context;
-    private int appWidgetId;
 
     public StackRemoteViewsFactory(Context context, Intent intent) {
         this.context = context;
-        appWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
-                AppWidgetManager.INVALID_APPWIDGET_ID);
     }
 
     // Initialize the data set.
@@ -37,24 +36,26 @@ class StackRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
         // In onCreate() you set up any connections / cursors to your data source. Heavy lifting,
         // for example downloading or creating content etc, should be deferred to onDataSetChanged()
         // or getViewAt(). Taking more than 20 seconds in this call will result in an ANR.
-        for (int i = 0; i < count; i++) {
-            widgetItems.add(new Quotes(i+ toString(), toString(), toString()));
+
+        QuoteDatabase quoteDatabase = Room.databaseBuilder(context, QuoteDatabase.class, "quote_db")
+                .allowMainThreadQueries().build();
+
+        List<Quote> quoteDaoList = quoteDatabase.quoteDao().getAll();
+
+        for (Quote quoteDao : quoteDaoList) {
+            Quotes quotes = new Quotes(quoteDao.getAuthor(), quoteDao.getCategory(), quoteDao.getTitle());
+            widgetItems.add(quotes);
         }
     }
 
     @Override
-    public void onDataSetChanged() {
-
-    }
-
-    @Override
     public void onDestroy() {
-
+        widgetItems.clear();
     }
 
     @Override
     public int getCount() {
-        return 0;
+        return widgetItems.size();
     }
 
     // Given the position (index) of a WidgetItem in the array, use the item's text value in
@@ -65,7 +66,7 @@ class StackRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
         // Construct a RemoteViews item based on the app widget item XML file, and set the
         // text based on the position.
         RemoteViews rv = new RemoteViews(context.getPackageName(), R.layout.widget_stack_item);
-        rv.setTextViewText(R.id.widget_text, widgetItems.get(position).getAuthor());
+        rv.setTextViewText(R.id.widget_text, widgetItems.get(position).getTitle());
 
         // Next, set a fill-intent, which will be used to fill in the pending intent template
         // that is set on the collection view in StackWidgetProvider.
@@ -76,7 +77,6 @@ class StackRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
         // Make it possible to distinguish the individual on-click
         // action of a given item
         rv.setOnClickFillInIntent(R.id.widget_text, fillInIntent);
-
 
         // Return the RemoteViews object.
         return rv;
@@ -89,16 +89,21 @@ class StackRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
 
     @Override
     public int getViewTypeCount() {
-        return 0;
+        return 1;
     }
 
     @Override
-    public long getItemId(int i) {
-        return 0;
+    public long getItemId(int position) {
+        return position;
     }
 
     @Override
     public boolean hasStableIds() {
-        return false;
+        return true;
+    }
+
+    @Override
+    public void onDataSetChanged() {
+
     }
 }

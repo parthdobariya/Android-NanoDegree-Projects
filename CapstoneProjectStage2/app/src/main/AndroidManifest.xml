@@ -23,6 +23,10 @@
                 android:resource="@xml/widget_info" />
         </receiver>
 
+        <service android:name=".widgets.StackWidgetService"
+            android:permission="android.permission.BIND_REMOTEVIEWS"
+            android:exported="false" />
+
         <activity
             android:name=".ui.quotes.QuoteDetailsActivity"
             android:label="@string/title_activity_quote_details"

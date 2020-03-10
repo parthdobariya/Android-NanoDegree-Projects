@@ -2,6 +2,15 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
 
 android {
+    signingConfigs {
+        debug {
+            storeFile file('/Users/Parth/Desktop/CapstoneProjectStage2')
+            storePassword 'CapstoneProjectStage2'
+            keyAlias = 'CapstoneProjectStage2key'
+            keyPassword 'CapstoneProjectStage2'
+        }
+    }
+
     compileSdkVersion 28
     defaultConfig {
         applicationId "app.parth.in.capstoneprojectstage_2"

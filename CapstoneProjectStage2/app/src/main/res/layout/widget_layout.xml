@@ -2,7 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/design_default_color_primary_dark"
+    android:background="@android:color/transparent"
     android:layout_margin="@dimen/widget_padding">
 
     <StackView
@@ -12,9 +12,6 @@
         android:gravity="center"
         android:background="@android:color/transparent"
         android:loopViews="true"/>
-<!--
-    android:background="@android:color/transparent"
--->
 
     <TextView
         android:id="@+id/empty_view"
@@ -22,6 +19,5 @@
         android:gravity="center"
         android:textStyle="bold"
         android:textSize="15sp"
-        android:layout_height="match_parent"
-        />
+        android:layout_height="match_parent"/>
 </FrameLayout>
